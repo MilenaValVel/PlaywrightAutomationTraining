@@ -1,0 +1,253 @@
+New Request Wizard – Business-Critical Test Scenarios
+
+Feature: New Request Wizard
+Test Type: Manual Functional / End-to-End Testing
+Verify that citizens can successfully register service requests with all four priority levels (Low, Medium, High, Urgent), including an Emergency request requiring alternate contact information.
+The test cases focus on the core business functionality: successful registration of new service requests.
+TestCase	Business Scenario	                    Priority	Emergency
+TC-01	    Register a routine service request	    Low	        No
+TC-02	    Register a standard service request	    Medium	    No
+TC-03	    Register an important service request	High	    No
+TC-04	    Register a critical service request	    Urgent	    No
+TC-05	    Register an emergency request	        Urgent	    Yes
+
+All five scenarios follow the same wizard:
+1. Basic Information
+2. Location Details
+3. Contact Information
+4. Additional Details
+5. Review & Submit
+
+
+Test Cases:
+TC-01 – Register a new request with Low priority
+Verify that a citizen can successfully register a routine service request with Low priority and without Emergency status.
+
+Test Data:
+Request Title	Damaged park bench
+Description	A wooden bench in the public park has minor damage and requires maintenance.
+Date	11/21/2026
+Category	Parks & Recreation
+Priority	Low
+Emergency	No
+Address	6 Yana Yazova, Sofia, 1700
+Location Description	Bench near the main park entrance
+Preferred Contact	Email
+Email	qa.low@example.com
+Phone	+359888111111
+Terms & Conditions	Accepted
+
+Steps:
+1. Open the New Request Wizard.
+2. In Step 1, enter the request title, description, date, category, and select Low priority.
+3. Leave the Emergency switch disabled and click Next.
+4. In Step 2, enter the location details and select the location on the map.
+5. In Step 3, enter valid contact information.
+6. In Step 4, accept the Terms & Conditions and proceed.
+7. In Step 5, verify the entered information and click Submit Request.
+
+Expected Result:
+- The request is successfully registered.
+- The saved priority is Low.
+- Emergency status is No.
+- All entered information is saved correctly.
+- A successful submission confirmation is displayed.
+- The request is available in the system with the correct priority and status.
+
+The scenario is stable, repeatable, and follows the standard business workflow. It is suitable for automated regression testing.
+
+TC-02 – Register a new request with Medium priority
+Verify that a citizen can register a standard service request with Medium priority.
+
+Test Data:
+Request Title	Streetlight not working
+Description	A streetlight has stopped working and the surrounding pedestrian area is poorly illuminated.
+Date	11/21/2026
+Category	Roads & Infrastructure
+Priority	Medium
+Emergency	No
+Address	6 Yana Yazova, Sofia, 1700
+Location Description	Streetlight next to the building entrance
+Preferred Contact	Email
+Email	qa.medium@example.com
+Phone	+359888222222
+Terms & Conditions	Accepted
+
+Steps:
+1. Open the New Request Wizard.
+2. Complete Step 1 with valid data and select Medium priority.
+3. Verify that Emergency is disabled.
+4. Complete Step 2 with the streetlight location.
+5. Complete Step 3 with valid contact information.
+6. Accept the Terms & Conditions in Step 4.
+7. In Step 5, verify that Medium priority is displayed.
+8. Click Submit Request.
+
+Expected Result:
+- The request is successfully registered.
+- The saved priority is Medium.
+- Emergency status is No.
+- The selected category and location are saved correctly.
+- The system confirms successful registration.
+
+The scenario is deterministic and can be executed repeatedly with different test data.
+
+TC-03 – Register a new request with High priority
+Verify that a citizen can register a High-priority service request and that the selected priority is preserved throughout the wizard.
+
+Test Data:
+Request Title	Large pothole on main road
+Description	A large pothole is causing traffic difficulties and could damage passing vehicles.
+Date	11/21/2026
+Category	Roads & Infrastructure
+Priority	High
+Emergency	No
+Address	6 Yana Yazova, Sofia, 1700
+Location Description	Pothole near the intersection
+Preferred Contact	Email
+Email	qa.high@example.com
+Phone	+359888333333
+Terms & Conditions	Accepted
+
+Steps:
+1. Open the New Request Wizard.
+2. Complete Step 1 and select High priority.
+3. Leave Emergency disabled.
+4. Complete Step 2 with the exact location.
+5. Complete Step 3 with valid contact information.
+6. Accept the Terms & Conditions in Step 4.
+7. Navigate to Step 5 and verify the priority is High.
+8. Click Back to return to the previous steps and verify the selected priority is preserved.
+9. Return to Step 5 and click Submit Request.
+
+Expected Result:
+- High priority remains selected after navigating backward and forward.
+- The request is successfully registered.
+- The saved priority is High.
+- Emergency status is No.
+- No previously entered information is lost.
+- The system confirms successful registration.
+
+This scenario verifies both a critical business attribute and data persistence during navigation. It has high regression value and predictable expected results.
+
+TC-04 – Register a new request with Urgent priority
+Verify that a citizen can register an Urgent-priority request without marking it as an Emergency.
+
+Test Data:
+Request Title	Major water leak on public street
+Description	A major water leak is flooding the street and requires urgent maintenance to prevent further damage.
+Date	11/21/2026
+Category	Water & Utilities (if available)
+Priority	Urgent
+Emergency	No
+Address	6 Yana Yazova, Sofia, 1700
+Location Description	Water leaking from the pavement near the road
+Preferred Contact	Phone
+Email	qa.urgent@example.com
+Phone	+359888444444
+Terms & Conditions	Accepted
+
+Steps:
+1. Open the New Request Wizard.
+2. Complete Step 1 and select Urgent priority.
+3. Verify that Emergency remains disabled.
+4. Complete Step 2 with valid location information.
+5. Complete Step 3 and select Phone as the preferred contact method.
+6. Complete Step 4 and accept the Terms & Conditions.
+7. In Step 5, verify that Urgent priority and Emergency = No are displayed.
+8. Click Submit Request.
+
+Expected Result:
+- The request is successfully registered.
+- The saved priority is Urgent.
+- Emergency status remains No.
+- Alternate emergency contact information is not required.
+- The selected preferred contact method is saved correctly.
+- The system confirms successful registration.
+
+Urgent requests represent a business-critical workflow. Automated regression testing helps detect defects affecting the highest priority level without Emergency status.
+
+TC-05 – Register an Emergency request with mandatory alternate contact ynformation
+Verify that enabling Emergency status requires alternate contact information and prevents submission until all mandatory emergency contact details are provided.
+
+Test Data:
+Request Title	Fallen tree blocking public road
+Description	A large fallen tree is blocking the road and creating an immediate danger to vehicles and pedestrians.
+Date	11/21/2026
+Category	Roads & Infrastructure
+Priority	Urgent
+Emergency	Yes
+Address	6 Yana Yazova, Sofia, 1700
+Location Description	Fallen tree blocking both traffic lanes
+Preferred Contact	Phone
+Primary Email	qa.emergency@example.com
+Primary Phone	+359888555555
+Alternate Contact Name	John Doe
+Alternate Contact Phone	+359888666666
+Terms & Conditions	Accepted
+
+Steps:
+1. Open the New Request Wizard.
+2. Complete Step 1 with valid request details.
+3. Select Urgent priority.
+4. Enable Is this an emergency?
+5. Complete Step 2 with the incident location.
+6. Navigate to Step 3 – Contact Information.
+7. Enter valid primary contact information.
+8. Leave the mandatory alternate contact information empty.
+9. Attempt to proceed to the next step.
+10. Verify that validation errors are displayed for the missing alternate contact information.
+11. Enter a valid alternate contact name and phone number.
+12. Click Next and verify that navigation is allowed.
+13. Complete Step 4 and accept the Terms & Conditions.
+14. Navigate to Step 5 – Review & Submit.
+15. Verify that Emergency = Yes, Urgent priority, and the alternate contact details are correct.
+16. Click Submit Request.
+
+Expected Result:
+- Enabling Emergency status activates the requirement for alternate contact information.
+- The user cannot proceed or submit the request while mandatory alternate contact details are missing.
+- Appropriate validation errors are displayed.
+- After providing valid alternate contact information, the user can continue.
+- The review page displays the correct emergency status and contact details.
+- The request is successfully registered with Urgent priority and Emergency = Yes.
+- Both primary and alternate contact information are saved correctly.
+- The system confirms successful registration.
+
+
+Automation selection criteria
+The tests are evaluated using these qualities:
+- Repeatability: All five request registration scenarios can be executed repeatedly.
+- Predictability: Each scenario has clear inputs and expected results.
+- Independent tests
+- Business Criticality: Urgent and Emergency requests are especially important because defects could delay handling serious incidents.
+- Regression Value: Priority selection, data persistence, and successful submission should be verified after application changes.
+- Maintenance Cost: The four priority scenarios can share one automated workflow with different test data, reducing duplication.
+
+Recommended Automation Approach
+Use a data-driven automation approach for TC-01 through TC-04.
+Instead of writing four completely separate automated scripts, create one reusable test with four data sets.
+
+Task 3 — One scenario that should not be automated
+TC06 — Visual usability evaluation of the New Request Wizard
+Evaluate whether the wizard is understandable and comfortable for a first-time Citizen.
+
+Keep as exploratory manual testing
+
+Steps:
+1. Log in as Citizen.
+2. Open the New Request Wizard.
+3. Review the layout, instructions, and field labels.
+4. Navigate through each step.
+5. Evaluate whether error messages are understandable.
+6. Check whether buttons, spacing, and navigation feel intuitive.
+
+Expected result:
+
+A first-time Citizen can understand and complete the wizard without unnecessary confusion. Instructions are clear, the navigation is intuitive, and error messages explain how to correct mistakes.
+
+Why not automate this scenario?
+- Usability depends partly on human judgment.
+- Playwright can check whether elements exist but cannot reliably determine whether instructions feel intuitive to a real user.
+- Subjective design evaluation does not have a single deterministic pass/fail result.
+- Automated accessibility checks and visual regression tests can complement this manual assessment, but they do not replace exploratory usability testing.
